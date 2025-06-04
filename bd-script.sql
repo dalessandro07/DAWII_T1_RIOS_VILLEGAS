@@ -8,5 +8,8 @@ CREATE TABLE DragonBall(
     max_ki text,
     raza text,
     genero text,
-    descripcion text
+    descripcion blob,
+    image text
 );
+
+select * from DragonBall;

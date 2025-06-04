@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0" />
+<title>Dragon Ball - Personajes</title>
+<link
+  href="https://cdn.jsdelivr.net/npm/daisyui@5"
+  rel="stylesheet"
+  type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-base-100 p-8">
+  <h1 class="text-4xl font-extrabold text-center text-primary mb-10">Personajes
+    de Dragon Ball</h1>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <!-- Tabla de personajes -->
+    <div class="lg:col-span-2 overflow-x-auto">
+      <div class="card bg-base-200 shadow-xl rounded-box p-4">
+        <h2 class="text-2xl font-semibold mb-4">Lista de personajes</h2>
+        <table class="table table-zebra w-full">
+          <thead class="bg-base-300 text-base-content text-sm">
+            <tr>
+              <th>ID</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Ki</th>
+              <th>Max Ki</th>
+              <th>Raza</th>
+              <th>Género</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="p : ${personajes}">
+              <td th:text="${p.id}"></td>
+              <td><img
+                th:src="${p.image}"
+                alt="Imagen"
+                class="w-14 h-14 rounded-full object-cover object-top shadow" /></td>
+              <td th:text="${p.nombre}"></td>
+              <td th:text="${p.ki}"></td>
+              <td th:text="${p.max_ki}"></td>
+              <td th:text="${p.raza}"></td>
+              <td th:text="${p.genero}"></td>
+              <td>
+                <div
+                  class="max-h-[100px] overflow-auto text-sm"
+                  th:text="${p.descripcion}"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          th:if="${personajes == null or personajes.isEmpty()}"
+          class="alert alert-warning mt-4">No hay personajes
+          registrados.</div>
+      </div>
+    </div>
+    <!-- Formulario -->
+    <div>
+      <div class="card bg-base-200 shadow-xl p-6 rounded-box">
+        <h2 class="text-2xl font-semibold text-center mb-6">Agregar
+          personaje</h2>
+        <form
+          th:action="@{/personajes}"
+          method="post"
+          class="space-y-4">
+          <div class="flex flex-col">
+            <label
+              for="nombre"
+              class="label text-sm font-medium">Nombre</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="nombre"
+              id="nombre"
+              required />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="ki"
+              class="label text-sm font-medium">Ki</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="ki"
+              id="ki" />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="max_ki"
+              class="label text-sm font-medium">Max Ki</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="max_ki"
+              id="max_ki" />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="raza"
+              class="label text-sm font-medium">Raza</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="raza"
+              id="raza" />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="genero"
+              class="label text-sm font-medium">Género</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="genero"
+              id="genero" />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="image"
+              class="label text-sm font-medium">URL de Imagen</label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="image"
+              id="image" />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="descripcion"
+              class="label text-sm font-medium">Descripción</label>
+            <textarea
+              class="textarea textarea-bordered w-full"
+              name="descripcion"
+              id="descripcion"
+              rows="3"></textarea>
+          </div>
+          <button
+            class="btn btn-primary w-full mt-4"
+            type="submit">Agregar personaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
